@@ -122,11 +122,11 @@ function generateMaze()
 		// 4. create south walls
 		wallsCreated = {};
 		for ( i = 0; i < gridCols; i ++ ) {
-			currentSet = sets[i]
+			currentSet = sets[i];
 			// find out if the cell is not the only one in its set or
 			// if it is the only member of its set without a bottom wall;
 			// in either case, the south wall cannot be built
-			allowWallCreation = true
+			allowWallCreation = true;
 			if ( sets.filter( function(element) { return element === currentSet } ).length === 1 ) {
 				allowWallCreation = false;
 			}
@@ -136,7 +136,7 @@ function generateMaze()
 					// check to make sure at least one cell in this set has an open wall;
 					// if not, disallow creation of the wall
 					if ( sets.slice(0, i).filter( function(element) { return element === currentSet } ).length === wallsCreated[currentSet] ) {
-						allowWallCreation = false
+						allowWallCreation = false;
 					}
 				}
 			}
@@ -169,14 +169,14 @@ function generateMaze()
 				// if south wall exists, remove cell from current set and remove south wall
 				if ( row[i][2] === true ) {
 					delete sets[i]; // IS THIS CORRECT?
-					row[i][2] = false
+					row[i][2] = false;
 					// since south wall exists, north wall of this new cell exists too
-					row[i][0] = true
+					row[i][0] = true;
 				}
 				// if south wall doesn't exist, make sure that this new cell below previous cell
 				// has no north wall
 				else {
-					row[i][0] = false
+					row[i][0] = false;
 				}
 			}
 			// move back to step 2 (beginning of while loop)
@@ -184,34 +184,34 @@ function generateMaze()
 		else {
 			for (i = 0; i < gridCols; i ++ ) {
 				// add south wall
-				row[i][2] = true
+				row[i][2] = true;
 				// if there is a neighbor to the east and it is part of a different set
 				if ( i < gridCols - 1 ) {
-					currentSet = sets[i]
+					currentSet = sets[i];
 					neighborSet = sets[i + 1]
 					if ( currentSet != neighborSet ) {
 						// remove current cell's east wall
-						row[i][1] = false
+						row[i][1] = false;
 						// remove neighbor cell's west wall
-						row[i + 1][3] = false
+						row[i + 1][3] = false;
 						// make every cell part of the neighbor's set part of the current cell's set
 						for (j = 0; j < gridCols; j ++ ) {
 							if ( sets[j] == neighborSet ) {
-								sets[j] = currentSet
+								sets[j] = currentSet;
 							}
 						}
 					}
 				}
 			}
 			maze.push(JSON.parse(JSON.stringify(row)));
-			mazeFinished = true
+			mazeFinished = true;
 		}
 	}
 	// return the maze lists transposed to use the more familiar [col][row] indexing
 	// using clever snippet explained here: http://stackoverflow.com/a/17428705/4747275
 	maze = maze[0].map(function(col, i) { 
 		return maze.map(function(row) { 
-			return row[i] 
+			return row[i];
 		})
 	});
 
