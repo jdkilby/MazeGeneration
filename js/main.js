@@ -344,6 +344,8 @@ function triggerMazeRegen() {
 
 function processMouseInput(event)
 {   
+	event.preventDefault();
+	
 	if ( settingUpGame ) {
 		return;
 	}
@@ -370,7 +372,6 @@ function processMouseInput(event)
 	else if ( mouseX > 100 && mouseX < 150 && mouseY > mazeHeight + 25 && mouseY < mazeHeight + 75 ) {
 		movePlayer = 2;
 	}
-	
 }
 
 // ----------------------------------------------------
